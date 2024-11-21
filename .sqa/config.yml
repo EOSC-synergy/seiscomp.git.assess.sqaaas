@@ -1,0 +1,72 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/SeisComP/seiscomp:
+      branch: master
+      repo: https://github.com/SeisComP/seiscomp.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/SeisComP/seiscomp git:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-lilac-fossa.sh
+        container: qc.acc_lumpy-sapphire-gorilla
+  QC.Doc:
+    repos:
+      github.com/SeisComP/seiscomp find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.geeky-ivory-cuscus.sh
+        container: qc.doc_jumpy-yellow-cockroach
+      github.com/SeisComP/seiscomp git:
+        commands:
+        - /usr/bin/env sh .sqa/script.pasty-viridian-spider.sh
+        container: qc.doc_wheezy-harlequin-horse
+      github.com/SeisComP/seiscomp markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.muggy-coral-abyssinian.sh
+        container: qc.doc_randy-olivine-crane
+      github.com/SeisComP/seiscomp restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.baggy-platinum-centipede.sh
+        container: qc.doc_clammy-wheat-akbash
+  QC.Lic:
+    repos:
+      github.com/SeisComP/seiscomp licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-taupe-penguin.sh
+        container: qc.lic_skanky-tangerine-mist
+  QC.Sec:
+    repos:
+      github.com/SeisComP/seiscomp bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-apricot-lizard.sh
+        container: qc.sec_whiny-fuchsia-giraffe
+  QC.Sty:
+    repos:
+      github.com/SeisComP/seiscomp flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-ecru-bombay.sh
+        container: qc.sty_gamy-cobalt-chimpanzee
+      github.com/SeisComP/seiscomp oclint:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-emerald-cheetah.sh
+        container: qc.sty_flabby-ochre-collie
+  QC.Uni:
+    repos:
+      github.com/SeisComP/seiscomp pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.droopy-grey-rabbit.sh
+        container: qc.uni_hasty-teal-ibis
+  QC.Ver:
+    repos:
+      github.com/SeisComP/seiscomp get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-gamboge-quoll.sh
+        container: qc.ver_nerdy-goldenrod-baboon
+timeout: 5400
